@@ -1,0 +1,4 @@
+1 change sensor update frequency to 1/30minutes
+2 change elapsed time update frequency to 1/5minutes
+3 enable CTRL line
+4 enable powersave modes & wakeups
