@@ -3,9 +3,9 @@
  * This program times pulses on two input pins (D3 & D2)
  * and converts to a frequency. It then publishes the frequencies
  * to the Particle Cloud.
- * 
- * Current Update Frequency : 1 /hour
- * Current Timer Frequency : 1 /minute
+ *
+ * Current Update Frequency : 2 /hour
+ * Current Timer Frequency : every 5 minutes
  *
  *
  * Future work: see TODO.txt
@@ -18,7 +18,7 @@
 
 int CapSense = D3;
 int THSense = D2;
-double CapHalfPeriod = 0; 
+double CapHalfPeriod = 0;
 double CapPeriod = 0;
 double CapFreq = 0;
 double THHalfPeriod = 0;
@@ -30,14 +30,16 @@ String Data = NULL;
 
 int CurrentHour = 25;
 int NextHour = 25;
+int CurrentMinute = 60;
+int NextMinute = 60;
 
 int UpdateFlag = 0;
-int MinuteInterval = 60000; //60000 milliseconds in a minute
+int FiveMinuteInterval = 30000; //60000 milliseconds in a minute; 300000 in 5
 
-void check_if_hour_elapsed();
+void check_if_half_hour_elapsed();
 void FirstCheck();
 
-Timer timer(MinuteInterval, check_if_hour_elapsed); //timer used for periodic checks
+Timer timer(FiveMinuteInterval, check_if_half_hour_elapsed); //timer used for periodic checks
 
 void setup() {
   pinMode(CapSense, INPUT_PULLDOWN);
@@ -50,14 +52,21 @@ void setup() {
     NextHour = CurrentHour + 1;
   }
 
+  CurrentMinute = Time.minute(); //establish current time
+  if((CurrentMinute + 1) > 59){  //if-else statement prevents non-existent minutes
+    NextMinute = ((CurrentMinute + 1) - 60);
+  }else{
+    NextMinute = CurrentMinute + 1;
+  }
+
   Particle.variable("Cap Freq", CapFreq); //two cloud variables
   Particle.variable("Temp Freq", THFreq); //Markus, you can try fetching these using api
-  
+
   FirstCheck(); //initializes current temp and cap values
-  
+
   Particle.publish("Setup complete", NULL, 60, PRIVATE); //setup function finishes out
 
-  timer.start(); 
+  timer.start();
 }
 
 void loop() {
@@ -79,14 +88,16 @@ void loop() {
   }
 }
 
-void check_if_hour_elapsed(){ //called by timer to check if it's time to update
+void check_if_half_hour_elapsed(){ //called by timer to check if it's time to update
   CurrentHour = Time.hour(); //update current time
-  if(CurrentHour == NextHour){ //check if hour elapsed and set flag if it has
+  CurrentMinute = Time.minute();
+  //if(CurrentHour == NextHour){ //check if hour elapsed and set flag if it has
+  if(CurrentMinute == NextMinute){
     UpdateFlag = 1;
-    if(CurrentHour >= 23){ //if-else statement prevents non-existent hours
-      NextHour = 0;
+    if((CurrentMinute + 1) > 59){  //if-else statement prevents non-existent minutes
+      NextMinute = ((CurrentMinute + 1) - 60);
     }else{
-      NextHour = CurrentHour + 1;
+      NextMinute = CurrentMinute + 1;
     }
     CapHalfPeriod = pulseIn(CapSense, HIGH); //pulseIn times a low or high pulse, aka half of a period of a square wave
     CapPeriod = 2 * CapHalfPeriod; //double pulse length
