@@ -4,9 +4,10 @@
  * and converts to a frequency. It then publishes the frequencies
  * to the Particle Cloud.
  *
- * Current Update Frequency : 2 /hour
- * Current Timer Frequency : every 5 minutes
+ * Current Update Frequency :  60/hour
+ * Current Timer Frequency : every 0.5 minutes
  *
+ * Currently using sleep mode @ 40mA
  *
  * Future work: see TODO.txt
  *
@@ -14,10 +15,13 @@
  * email: andrew.muscha@auburn.edu
  * Last Updated: 9/20/2016
  */
-
+#define HALF_HOUR_IN_SECONDS 1800
+#define SLEEP_TIME_OFFSET 1750
+#define SLEEP_DELAY 5000
 
 int CapSense = D3;
 int THSense = D2;
+int CtrlLine = D1;
 double CapHalfPeriod = 0;
 double CapPeriod = 0;
 double CapFreq = 0;
@@ -27,6 +31,7 @@ double THFreq = 0;
 String Variable = NULL;
 String Data = NULL;
 
+bool PublishStatus = false;
 
 int CurrentHour = 25;
 int NextHour = 25;
@@ -44,6 +49,8 @@ Timer timer(FiveMinuteInterval, check_if_half_hour_elapsed); //timer used for pe
 void setup() {
   pinMode(CapSense, INPUT_PULLDOWN);
   pinMode(THSense, INPUT_PULLDOWN);
+  pinMode(CtrlLine, OUTPUT);
+  digitalWrite(CtrlLine, HIGH);
 
   CurrentHour = Time.hour(); //establish current time
   if(CurrentHour >= 23){  //if-else statement prevents non-existent hours
@@ -61,11 +68,14 @@ void setup() {
 
   Particle.variable("Cap Freq", CapFreq); //two cloud variables
   Particle.variable("Temp Freq", THFreq); //Markus, you can try fetching these using api
+  Particle.variable("stat", PublishStatus);
 
   FirstCheck(); //initializes current temp and cap values
 
   Particle.publish("Setup complete", NULL, 60, PRIVATE); //setup function finishes out
 
+  delay(SLEEP_DELAY);
+  System.sleep(HALF_HOUR_IN_SECONDS - SLEEP_TIME_OFFSET);
   timer.start();
 }
 
@@ -76,6 +86,9 @@ void loop() {
     CapFreq = 1 /  CapPeriod; //frequency = 1/periodic
     THFreq = 1 / THPeriod;
 
+    while(!Particle.connected()){
+
+    }
     Variable = String("CapFreq"); //preparing data as strings to be published
     Data = String(CapFreq);
     Particle.publish(Variable, Data, 60, PRIVATE); //publish current data
@@ -84,6 +97,8 @@ void loop() {
     Data = String(THFreq);
     Particle.publish(Variable, Data, 60, PRIVATE);
 
+    delay(SLEEP_DELAY);
+    System.sleep(HALF_HOUR_IN_SECONDS - SLEEP_TIME_OFFSET);
     timer.start(); //restart timer for periodic updates
   }
 }
@@ -99,32 +114,40 @@ void check_if_half_hour_elapsed(){ //called by timer to check if it's time to up
     }else{
       NextMinute = CurrentMinute + 1;
     }
+    digitalWrite(CtrlLine, LOW);
     CapHalfPeriod = pulseIn(CapSense, HIGH); //pulseIn times a low or high pulse, aka half of a period of a square wave
     CapPeriod = 2 * CapHalfPeriod; //double pulse length
     CapPeriod = CapPeriod * .000001; //pulseIn returns value in milliseconds; convert to seconds
     THHalfPeriod = pulseIn(THSense, HIGH);
     THPeriod = 2 * THHalfPeriod;
     THPeriod = THPeriod * .000001;
+    digitalWrite(CtrlLine, HIGH);
   }
 }
 
 void FirstCheck(){
+
+  digitalWrite(CtrlLine, LOW);
+  delayMicroseconds(15);
   CapHalfPeriod = pulseIn(CapSense, HIGH); //pulseIn times a low or high pulse, aka half of a period of a square wave
   CapPeriod = 2 * CapHalfPeriod; //double pulse length
   CapPeriod = CapPeriod * .000001; //pulseIn returns value in milliseconds; convert to seconds
   THHalfPeriod = pulseIn(THSense, HIGH);
   THPeriod = 2 * THHalfPeriod;
   THPeriod = THPeriod * .000001;
+  digitalWrite(CtrlLine, HIGH);
 
   CapFreq = 1 /  CapPeriod; //frequency = 1 / period
   THFreq = 1 / THPeriod;
 
   Variable = String("CapFreq"); //preparing data as strings to be published
   Data = String(CapFreq);
-  Particle.publish(Variable, Data, 60, PRIVATE); //publish current data
+  PublishStatus = Particle.publish(Variable, Data, 60, PRIVATE); //publish current data
 
   Variable = String("THFreq");
   Data = String(THFreq);
-  Particle.publish(Variable, Data, 60, PRIVATE);
+  PublishStatus = Particle.publish(Variable, Data, 60, PRIVATE);
+
+
 
 }
