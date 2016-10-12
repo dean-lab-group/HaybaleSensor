@@ -18,7 +18,7 @@
 long SleepTimeInSeconds = 86400;
 
 int BattVolt = A5;
-int CapSense = D3;
+int CapSense = D4;
 int THSense = D5;
 int CtrlLine = D6;
 int error = D7;
@@ -37,6 +37,8 @@ double CurrentVoltage = 0;
 
 String Variable = NULL;
 String Data = NULL;
+
+String mySSID;
 
 unsigned int TimerPeriod = 1000;
 
@@ -68,7 +70,7 @@ void CapISR(void){
 }
 
 void setup() {
-  RGB.control(true);
+//  RGB.control(true);
   pinMode(CapSense, INPUT_PULLDOWN);
   pinMode(THSense, INPUT_PULLDOWN);
   pinMode(CtrlLine, OUTPUT);
@@ -92,7 +94,7 @@ void loop(){
   else if(SecFlag == 1){
     RGB.color(0,255,0);
     SecFlag = 0;
-    //  LoopFlag = 1;
+    LoopFlag = 1;
     /*Variable = String("Pulses");
     Data = String(PulseCount);
     Particle.publish(Variable, Data, 60, PRIVATE);*/
@@ -102,7 +104,7 @@ void loop(){
 
     //CapLowPeriod = pulseIn(CapSense, LOW); //pulseIn times a low or high pulse, aka half of a period of a square wave
     //CapHighPeriod = pulseIn(CapSense, HIGH);
-    delay(1000);
+  //  delay(1000);
 
     THLowPeriod = pulseIn(THSense, LOW);
     THHighPeriod = pulseIn(THSense, HIGH);
@@ -114,15 +116,18 @@ void loop(){
 
 
     THFreq = (1 /  (double(THLowPeriod) + double(THHighPeriod))); //frequency = 1 / period
-    //CapFreq = CapFreq * 1000000;
+  //  CapFreq = CapFreq * 1000000;
     THFreq = THFreq * 1000000;
 
 
     CurrentVoltage = analogRead(BattVolt);
     CurrentVoltage = CurrentVoltage * ((3.3*2)/(4095*.914));
 
-    RGB.color(0,255,255);
+  //  RGB.color(0,255,255);*/
     while(!Particle.connected()){ }
+
+    /*mySSID = String(WiFi.SSID());
+    Particle.publish(mySSID, NULL, 60, PRIVATE);*/
 
     Variable = String("BatteryVolt");
     Data=String(CurrentVoltage);
@@ -139,7 +144,7 @@ void loop(){
     delay(10000);
 
 
-    RGB.color(0,0,0);
+    //RGB.color(0,0,0);
     System.sleep(SLEEP_MODE_DEEP, 10);
   }
 }
