@@ -1,19 +1,15 @@
 /* Haybale Wi-Fi sensor, V0.01
  *
- * This program times pulses on two input pins (D3 & D2)
+ * This program times pulses on two input pins (D4 & D5)
  * and converts to a frequency. It then publishes the frequencies
  * to the Particle Cloud.
  *
- * Current Update Frequency :  60/hour
- * Current Timer Frequency : every 0.5 minutes
- *
- * Currently using sleep mode @ 40mA
  *
  * Future work: see TODO.txt
  *
  * Author: Andrew Muscha
  * email: andrew.muscha@auburn.edu
- * Last Updated: 9/20/2016
+ * Last Updated: 10/18/2016
  */
 
 SYSTEM_MODE(SEMI_AUTOMATIC);
@@ -46,6 +42,7 @@ unsigned int TimerPeriod = 1000;
 int UpdateFlag = 0;
 int SecFlag = 0;
 int FifteenMinutes = 900;
+long offset = 0;
 
 WiFiAccessPoint aps[20];
 int found;
@@ -88,7 +85,8 @@ void setup() {
   delay(10);
 
   WiFi.connect(WIFI_CONNECT_SKIP_LISTEN);
-  delay(3000);
+//  delay(3000);
+  while(WiFi.connecting()){}
   if(WiFi.ready()){
     if(Particle.connected() == false){
       Particle.connect();
@@ -148,6 +146,11 @@ void loop(){
 
 
     //RGB.color(0,0,0);
-    System.sleep(SLEEP_MODE_DEEP, FifteenMinutes);
+    offset = millis();
+    offset = offset *.001;
+    offset = FifteenMinutes - offset;
+  //  offset = (long)offset;
+
+    System.sleep(SLEEP_MODE_DEEP, offset);
   }
 }
