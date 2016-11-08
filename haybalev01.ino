@@ -1,93 +1,91 @@
-/* Haybale Wi-Fi sensor, V0.01
+/* Haybale Wi-Fi sensor, V1.00
  *
  * This program times pulses on two input pins (D4 & D5)
  * and converts to a frequency. It then publishes the frequencies
  * to the Particle Cloud.
  *
+ * __THSense__
+ * This measures a variable frequency square wave. The pulseIn function 
+ * is used to measure the low and high pulses, and the two are added for 
+ * total period. 
  *
- * Future work: see TODO.txt
+ * __CapSense__
+ * This measures a wave that is nearly square, but not enough for 
+ * pulseIn to function properly. Instead an interrupt is used to count
+ * how many times the line goes high in 1 second, which itself is the
+ * frequency. 
+ *
+ * __End of program sleep__
+ * The photon goes into deep sleep mode for 15 minutes after every program execution.
+ * In this mode, when it restarts it does so from the very beginning. Only data
+ * in EEPROM (not used in this program) is saved.
  *
  * Author: Andrew Muscha
  * email: andrew.muscha@auburn.edu
- * Last Updated: 10/18/2016
+ * Last Updated: 10/31/2016
  */
 
-SYSTEM_MODE(SEMI_AUTOMATIC);
-long SleepTimeInSeconds = 86400;
+SYSTEM_MODE(SEMI_AUTOMATIC); //disable automatic particle cloud connection
 
-int BattVolt = A5;
-int CapSense = D4;
-int THSense = D5;
-int CtrlLine = D6;
-int error = D7;
+int BattVolt = A5; //naming individual pins 
+int CapSense = D4; 
+int THSense = D5; 
+int CtrlLine = D6; //power line for actual sensors 
 
-volatile long PulseCount = 0;
-volatile int LoopFlag = 0;
-volatile int PulseFlag = 0;
+volatile long PulseCount = 0;  //used to count pulses on CapSense
+volatile int LoopFlag = 0; //used to denote when a loop should be entered
 
-double CapFreq = 0;
-unsigned long THLowPeriod = 0;
-unsigned long THHighPeriod = 0;
-unsigned long CapLowPeriod = 0;
-unsigned long CapHighPeriod = 0;
-double THFreq = 0;
-double CurrentVoltage = 0;
+double CapFreq = 0; //holds measure frequency
+unsigned long THLowPeriod = 0; //holds low side of TH pulseIn
+unsigned long THHighPeriod = 0; //holds high side of TH pulseIn
+double THFreq = 0; //measures converted frequncy
+double CurrentVoltage = 0; //holds measured battery voltage
 
-String Variable = NULL;
+String Variable = NULL; //string variables used for publishing data
 String Data = NULL;
 String mySSID;
 
-unsigned int TimerPeriod = 1000;
+unsigned int TimerPeriod = 1000; //timer period 1000 ms == 1 second
 
-int UpdateFlag = 0;
-int SecFlag = 0;
-int FifteenMinutes = 900;
-long offset = 0;
-
-WiFiAccessPoint aps[20];
-int found;
+int SecFlag = 0; //flags when the 1second timer has elapsed
+int FifteenMinutes = 900; //900 seconds = 15 minutes
 
 
 
 void SetContinueFlag(void);
 
-Timer timer(TimerPeriod, SetContinueFlag);
+Timer timer(TimerPeriod, SetContinueFlag); //1 second timer for CapFreq calculation
+										   //Calls SetContinueFlag on finish
 
 void SetContinueFlag(){
-  detachInterrupt(CapSense);
-  timer.stop();
+  detachInterrupt(CapSense); //ends interrupts
+  timer.stop(); //stops timer
   //RGB.color(255,255,0);
-  SecFlag = 1; //set flag
+  SecFlag = 1; //set flag // sets flag to finish program
 }
 
-void CapISR(void){
+void CapISR(void){  //interrupt routine called every time a pulse is detected
 //  RGB.color(0,0,255);
-  //delayMicroseconds(8);
-  //if(pinReadFast(CapSense) == LOW){
-    if(!timer.isActive()){
-      timer.startFromISR();
-    }
-    PulseCount++;
-  //}
+  if(!timer.isActive()){ //starts 2 second timer is it hasn't already started
+    timer.startFromISR();
+  }
+  PulseCount++; //adds to pulse count
 }
 
 void setup() {
-  //noInterrupts();
   //RGB.control(true);
-  pinMode(CapSense, INPUT_PULLDOWN);
+  pinMode(CapSense, INPUT_PULLDOWN); //initialize pins
   pinMode(THSense, INPUT_PULLDOWN);
   pinMode(CtrlLine, OUTPUT);
-  pinMode(error, OUTPUT);
-  LoopFlag = 1;
+  LoopFlag = 1; //initialize variable
   PulseCount = 0;
   SecFlag = 0;
-  WiFi.on();
-  delay(10);
+  WiFi.on(); //turn wifi module on
+  delay(10); //wait for it to power on
 
-  WiFi.connect(WIFI_CONNECT_SKIP_LISTEN);
-//  delay(3000);
-  while(WiFi.connecting()){}
-  if(WiFi.ready()){
+  WiFi.connect(WIFI_CONNECT_SKIP_LISTEN); //connect to saved networks
+  while(WiFi.connecting()){} //wait for connection
+  if(WiFi.ready()){ //if wifi is properly connected, connect to Particle Cloud
     if(Particle.connected() == false){
       Particle.connect();
       while(!Particle.connected() == false){}
@@ -97,15 +95,15 @@ void setup() {
 
 
 
-void loop(){
+void loop(){ 
 
-  if(LoopFlag == 1){
+  if(LoopFlag == 1){ 
     //RGB.color(255,0,0);
-    pinResetFast(CtrlLine);
-    attachInterrupt(CapSense, CapISR, FALLING);
+    pinResetFast(CtrlLine); //turns on sensors (sensors are active-low)
+    attachInterrupt(CapSense, CapISR, FALLING); //activated interrupt for pulse counting
     LoopFlag = 0;
   }
-  else if(SecFlag == 1){
+  else if(SecFlag == 1){ //if 1 second timer finished (pulse count routine finished)
     //RGB.color(0,255,0);
     SecFlag = 0;
     LoopFlag = 1;
@@ -113,44 +111,43 @@ void loop(){
     CapFreq = PulseCount; //pulses = frequency
     PulseCount = 0;
 
-    THLowPeriod = pulseIn(THSense, LOW);
+    THLowPeriod = pulseIn(THSense, LOW); //get TH period lengths
     THHighPeriod = pulseIn(THSense, HIGH);
     pinSetFast(CtrlLine); //turn off sensors
 
     THFreq = (1 /  (double(THLowPeriod) + double(THHighPeriod))); //frequency = 1 / period
     THFreq = THFreq * 1000000;
 
-    CurrentVoltage = analogRead(BattVolt);
-    CurrentVoltage = CurrentVoltage * ((3.3*2)/(4095*.914));
+    
+	//Battery supplies at 4.5V, photon ADC reads up to 3.3 V. On-board resistor divider maps 4.5->3.3
+	//	so photon can detect proper votlage range.
+	CurrentVoltage = analogRead(BattVolt); 
+    CurrentVoltage = CurrentVoltage * ((3.3*2)/(4095*.914)); //reverses to 0-4.5V range for user
 
   //  RGB.color(0,255,255);*/
     if(Particle.connected()){
 
-    mySSID = String(WiFi.SSID());
-    Particle.publish(mySSID, NULL, 60, PRIVATE);
+    mySSID = String(WiFi.SSID()); //get wifi network name
+    Particle.publish(mySSID, NULL, 60, PRIVATE); //publishes name
 
-    Variable = String("BatteryVolt");
+    Variable = String("BatteryVolt"); //publish current battery voltage
     Data=String(CurrentVoltage);
     Particle.publish(Variable, Data, 60, PRIVATE);
 
-    Variable = String("THFreq");
+    Variable = String("THFreq"); //publishes current TH frequency
     Data = String(THFreq);
     Particle.publish(Variable, Data, 60, PRIVATE);
 
-    Variable = String("CapFreq");
+    Variable = String("CapFreq"); //publishes current Cap frequency
     Data = String(CapFreq);
     Particle.publish(Variable, Data, 60, PRIVATE);
     LoopFlag = 1;
-    delay(10000);
+    delay(10000); //waits for data t finish transmission
   }
 
 
     //RGB.color(0,0,0);
-    offset = millis();
-    offset = offset *.001;
-    offset = FifteenMinutes - offset;
-  //  offset = (long)offset;
 
-    System.sleep(SLEEP_MODE_DEEP, offset);
+    System.sleep(SLEEP_MODE_DEEP, offset); //go into deep sleep for 15 minutes
   }
 }
