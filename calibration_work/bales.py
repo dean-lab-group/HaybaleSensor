@@ -86,7 +86,8 @@ for sensor, data in boo.items():
               y1 + y1 * plot_margin))
     plt.legend()
     plt.grid()
-    plt.show()
-    plt.imsave(os.path.join('images', sensor + '.png'))
+    #plt.show()
+    plt.savefig(os.path.join('images', sensor + '.png'))
+    plt.close()
     #print "Moisture"
     #c, p = fit_data(capsense, voltage, moist)
