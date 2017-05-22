@@ -25,7 +25,7 @@ def float_array(x):
     float(x)
 
 
-source_file = 'temperature_calibration_batch2.csv'
+source_file = 'Sensor_Testing_Data/temperature_calibration_batch2.csv'
 delimiter = ','
 
 with open(source_file, 'r') as dest_f:
