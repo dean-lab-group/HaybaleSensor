@@ -1,5 +1,5 @@
 ﻿#Sensor,Voltage,Temp.,Report T.,Moisture,Report M.,
-Name,V,C,KHz,% moist,KHz,
+#Name,V,C,KHz,% moist,KHz,
 HB1,4.68,29,4.90196,0,16.944,
 HB1,4.65,27,5.5555,0,16.837,
 HB1,4.63,5,1.984,100,6.09,
