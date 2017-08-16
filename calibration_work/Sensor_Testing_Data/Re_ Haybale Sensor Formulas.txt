@@ -1,0 +1,42 @@
+From: Jeffery Craven <jdc0031@tigermail.auburn.edu>
+Subject: Re: Haybale Sensor Formulas
+Date: June 27, 2017 at 08:05:45 CDT
+To: Markus Kreitzer <mak0023@tigermail.auburn.edu>
+
+Sorry, I just now saw this. 
+ 
+The last six lines are for calculating the temperature in degrees Celsius, where xx is the reading for the temperature in Hz.
+ 
+To calculate the moisture percentage RH(%) you need to do the following:
+ 
+1.) Two inputs, frequency readings for moisture and temperature in Hz (x' and xx, respectively)
+2.) calculate  boundary lines, y_0 and y_100 using temperature in Hz for each sensor individually
+3.) calculate the slope as 100/(y_100-y_)  (This value should be negative)
+4.) calculate the intercept for your equation y'=m'x'+b' by the following equation: b'= -slope*y_0 (should be positive)
+5.) Combine results of m', b' in y'=m'x'+b', where x' is the reading of moisture in Hz and y' is the RH(%)
+ 
+Hope that helps, let me know if you run into any trouble.
+ 
+Jeff
+From: Markus Kreitzer
+Sent: Tuesday, June 27, 2017 6:58:54 AM
+To: Jeffery Craven
+Subject: Re: Haybale Sensor Formulas
+ 
+
+?
+
+On Jun 26, 2017, at 2:11 PM, Markus Kreitzer <mak0023@tigermail.auburn.edu> wrote:
+
+Jeff,
+I'm assuming all I need is the last six lines of the file you attached?
+
+Markus
+On Jun 26, 2017, at 13:11, Jeffery Craven <jdc0031@tigermail.auburn.edu> wrote:
+Markus, 
+
+I've attached the formulas for the four sensors that work. GitHub is still being problematic, so I went ahead and emailed it to you. Hopefully, the instructions are straight-forward enough
+
+Jeff
+<Equations.txt>
+
