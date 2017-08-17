@@ -18,7 +18,7 @@
 y_0 (varies, see below)
 y_100 (varies, see below)
 temp (varies, see below)
-slope_prime=(86/(y_0-y_100)) % will be negative
+slope_prime=(100/(y_0-y_100)) % will be negative
 intercept_prime=-slope*(y_0)  % will be positive
 y_prime= x_prime*slope_prime + intercept_prime
 
@@ -31,7 +31,7 @@ y_prime= x_prime*slope_prime + intercept_prime
 % Sensor	y_0				y_100
 % HB3		y_0=(-.2744)*xx+17645		y_100=.979*xx + 109.22
 % HB5		y_0=(-.22)*xx + 17838		y_100=.9861*xx + 46.437
-% HB6		y_0=(-.4372)*xx + 18511		y_100=.9816*xx + 78.208
+% HB6		y_0=(-.603)*xx + 19203		y_100=.9816*xx + 78.208
 % HB7		y_0=(-1.3092)*xx + 22099	y_100=.9858*xx + 50.6
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
