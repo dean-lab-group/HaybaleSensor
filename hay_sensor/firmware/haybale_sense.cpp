@@ -1,7 +1,46 @@
 #include "Particle.h"
 #include "haybale_sense.h"
 
-Sensor::Sensor(void){
+bool setup_wifi(){
+    WiFi.on();
+    // Delays for 10 ms to wait for WiFi module to power on. I'm not sure why we do this.
+    delay(10);
+    while(WiFi.connecting()){} //wait for connection
+    WiFi.connect(WIFI_CONNECT_SKIP_LISTEN);
+    if(WiFi.ready()){ //if wifi is properly connected, connect to Particle Cloud
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
+
+
+
+
+String getCoreID()
+{
+  String coreIdentifier = "";
+  char id[12];
+  memcpy(id, (char *)ID1, 12);
+  char hex_digit;
+  for (int i = 0; i < 12; ++i)
+  {
+    hex_digit = 48 + (id[i] >> 4);
+    if (57 < hex_digit)
+     hex_digit += 39;
+     coreIdentifier = coreIdentifier + hex_digit;
+    hex_digit = 48 + (id[i] & 0xf);
+   if (57 < hex_digit)
+     hex_digit += 39;
+   coreIdentifier = coreIdentifier + hex_digit;
+ }
+ return coreIdentifier;
+}
+
+
+/*Sensor::Sensor(void){
     this->temperature;
     this->moisture;
     this->pulse_count = 0
@@ -33,10 +72,4 @@ void set_continue_flag(void)
     //set flag
     // sets flag to finish program
 }
-
-void detect_pulse(void) {  //interrupt routine called every time a pulse is detected
-    if (!timer.isActive()) { //starts 2 second timer is it hasn't already started
-        timer.startFromISR();
-    }
-    this->pulse_count++; //adds to pulse count
-}
+*/
