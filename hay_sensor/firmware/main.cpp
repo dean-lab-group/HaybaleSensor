@@ -1,8 +1,12 @@
 #include "Particle.h"
 #include "haybale_sense.h"
+#include "convert.h"
+#include "Calibrator.h"
+
 //SYSTEM_MODE(SEMI_AUTOMATIC); //disable automatic particle cloud connection
 SYSTEM_MODE(MANUAL); //disable automatic particle cloud connection
 SerialLogHandler logHandler;
+Calibrator myCalibrator;
 
 // Global Variables
 volatile long pulse_count;
@@ -10,6 +14,9 @@ boolean moisture_timer_complete;
 bool first_run = true;
 unsigned int moisture_frequency = 0;
 float battery_voltage;
+
+// Test HB3
+
 
 // ***************************************
 // Functions
