@@ -1,0 +1,4 @@
+[submodule "firmware/FreqPeriodCounter"]
+	path = firmware/FreqPeriodCounter
+	url = https://github.com/pkourany/FreqPeriodCounter.git
+	branch = master

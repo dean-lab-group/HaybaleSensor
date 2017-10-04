@@ -1,23 +1,47 @@
 #include "Particle.h"
 #include "haybale_sense.h"
 
+void power_on_sensors(){
+    Log.trace("Powering on sensors");
+    // Turns on sensors (sensors are active-low)
+    pinResetFast(SENSOR_POWER_PIN);
+}
+
+float get_battery_voltage(void){
+    Log.trace("Getting battery voltage.");
+    // Funky math Andrew M. worked out to convert the analogRead value to the
+    // proper battery voltage value.
+    return (float)analogRead(BATTERY_PIN) * ((3.3*2.0)/(4095.0*0.914));
+}
+
+float get_temperature_freq(void){
+    Log.trace("Getting temperature frequency.");
+    unsigned long temp_period_low = pulseIn(TEMPERATURE_PIN, LOW);
+    unsigned long temp_period_high = pulseIn(TEMPERATURE_PIN, HIGH);
+    return (1000000.0 * (1.0/(float)(temp_period_low + temp_period_high)));
+}
+
+void power_down(void){
+    Log.trace("Powering down.");
+    pinSetFast(SENSOR_POWER_PIN); //turn off sensors
+    System.sleep(SLEEP_MODE_DEEP, DEEP_SLEEP_TIME);
+}
+
 bool setup_wifi(){
+    Log.trace("Powering on WiFi.");
     WiFi.on();
     // Delays for 10 ms to wait for WiFi module to power on. I'm not sure why we do this.
     delay(10);
-    while(WiFi.connecting()){} //wait for connection
+    Log.trace("Waiting for a WiFi connection.");
     WiFi.connect(WIFI_CONNECT_SKIP_LISTEN);
-    if(WiFi.ready()){ //if wifi is properly connected, connect to Particle Cloud
+    while(WiFi.connecting()); //wait for connection
+    if(WiFi.ready()){
         return true;
     }else{
+        WiFi.off();
         return false;
     }
 }
-
-
-
-
-
 
 String getCoreID()
 {

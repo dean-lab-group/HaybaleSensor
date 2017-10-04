@@ -11,11 +11,11 @@
 #define TEMPERATURE_PIN D5
 #define SENSOR_POWER_PIN D6  //power line for actual sensors
 #define POWER_ON_DELAY 10
-#define WIFI_TIMEOUT 10000
+#define WIFI_TIMEOUT 5000
 #define DEEP_SLEEP_TIME 900
-
-
+#define SERIAL_DELAY 10000
 #define TIMER_PERIOD 1000 // One second in milis
+
 // Calibration Data
 // These will be #define's for now, but eventually we need to build a calibration scheme.
 // Sensor "Haybale 4"
@@ -29,12 +29,15 @@
 // #define MOIST_FREQ_COEF 0.00008
 // #define MOIST_VOLT_COEF 0.0
 // #define MOIST_SHIFT 0.0
-#endif //FIRMWARE_HAYBALE_SENSE_H
 
 String getCoreID(void);
 bool setup_wifi();
 void power_on_sensors(void);
 void detect_pulse(void);
+float get_battery_voltage(void);
+float get_temperature_freq(void);
+void power_down(void);
+
 
 // class Sensor {
 // private:
@@ -58,3 +61,5 @@ void detect_pulse(void);
 //     double temperature;
 //     double moisture;
 // };
+
+#endif //FIRMWARE_HAYBALE_SENSE_H
