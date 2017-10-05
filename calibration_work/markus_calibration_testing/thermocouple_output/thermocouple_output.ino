@@ -26,5 +26,5 @@ void loop() {
 
   //Serial.print("C = ");
   Serial.println(thermocouple.readCelsius());
-  delay(500);
+  delay(1000);
 }
