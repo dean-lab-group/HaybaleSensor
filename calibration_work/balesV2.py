@@ -94,5 +94,5 @@ for sensor, data in sensor_data_dict.items():
     plt.legend()
     plt.grid()
     # plt.show()
-    plt.savefig(os.path.join('images', sensor + '.png'))
+    plt.savefig(os.path.join('old_images', sensor + '.png'))
     plt.close()

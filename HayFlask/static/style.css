@@ -1,0 +1,49 @@
+html {
+    font-size: 16px;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", serif;
+    font-weight: 100;
+}
+
+body {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #363636;
+}
+p {
+    margin: auto;
+}
+
+#container {
+    text-align: center;
+    margin: auto;
+}
+
+.name {
+    font-size: 3rem;
+    color: azure;
+    margin: auto;
+}
+
+.value {
+    font-size: 10rem;
+    color: azure;
+}
+
+.units {
+    font-size: 2rem;
+    vertical-align: middle;
+    letter-spacing: .35rem;
+}
+

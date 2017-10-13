@@ -6,7 +6,7 @@ from alerts import Alerts
 import settings
 
 def dump_the_pandas_data(data):
-    headers = ['DateTime', 'Thermocouple Temperature (C)', 'Sensor Temp (Hz)', 'Sensor Moist (Hz)']
+    headers = ['DateTime', 'Temperature', 'SensorTemp', 'SensorMoist']
     date_format = '%Y%m%d-%H%M%S'
     datestr = datetime.now().strftime(date_format)
     f = open('calibration_v2/HB_{DATE}.csv'.format(DATE=datestr), 'wb')

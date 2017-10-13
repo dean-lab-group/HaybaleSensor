@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Haybale Sensor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css" media="screen"/>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="{{ url_for('static', filename='sensor.js')}}"></script>
+</head>
+<body>
+<div id="container">
+    <div class="name">
+        <span id="name">Haybale Sensor </span>
+        <span id="number">--</span></div>
+    <div class="value">
+        <p>
+            <span class="name">Temp: </span>
+            <span class="value" id="temp">--</span>
+            <span class="units">&degF</span></p></div>
+    <div class="value">
+        <p>
+            <span class="name">Moist: </span>
+            <span class="value" id="moist">--</span>
+            <span class="units">&percnt;</span></p></div>
+</div>
+</body>
+</html>
