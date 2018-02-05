@@ -9,7 +9,7 @@ def root():
     return render_template('index.html')
 
 
-@app.route('/hay/sensor.json')
+@app.route('/sensor.json')
 def hay():
     return json.dumps(
         dict(
@@ -19,4 +19,4 @@ def hay():
         ))
 
 
-app.run(port=8080)
+app.run(host='0.0.0.0', port=8080)

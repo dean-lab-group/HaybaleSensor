@@ -1,3 +1,5 @@
+"use strict";
+
 $(document).ready(
     function (){
         get_values();
@@ -6,16 +8,19 @@ $(document).ready(
 
 
 function get_values() {
-    var number = document.getElementById('number');
-    var temp = document.getElementById('temp');
-    var moist = document.getElementById('moist');
-    $.getJSON('/hay/sensor.json', function (info) {
+    let number = document.getElementById('number');
+    let temp = document.getElementById('temp');
+    let moist = document.getElementById('moist');
+    $.getJSON('/sensor.json', function (info) {
+        /** @namespace info.sensor_name */
         number.innerHTML = info.sensor_name;
+        /** @namespace info.sensor_temperature */
         temp.innerHTML = info.sensor_temperature;
+        /** @namespace info.sensor_moisture */
         moist.innerHTML = info.sensor_moisture;
 
     });
 }
 
-var refreshId;
-refreshId = setInterval(get_values, 3000);
+let refreshId;
+refreshId = setInterval(get_values, 300);
