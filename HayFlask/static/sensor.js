@@ -23,4 +23,4 @@ function get_values() {
 }
 
 let refreshId;
-refreshId = setInterval(get_values, 300);
+refreshId = setInterval(get_values, 3000);

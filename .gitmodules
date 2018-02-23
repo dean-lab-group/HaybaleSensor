@@ -1,0 +1,6 @@
+[submodule "lib/FreqPeriodCounter"]
+	path = lib/FreqPeriodCounter
+	url = git@github.com:elec3647/FreqPeriodCounter.git
+[submodule "lib/HaySense"]
+	path = lib/HaySense
+	url = git@github.com:elec3647/HaySense.git
