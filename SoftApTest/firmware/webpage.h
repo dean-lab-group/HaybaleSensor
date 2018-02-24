@@ -1,6 +1,8 @@
-#pragma once
+#ifndef webpage_h
+#define webpage_h
 #include "Particle.h"
 #include "softap_http.h"
+#include "HaySense.h"
 
 struct Page
 {
@@ -10,3 +12,5 @@ struct Page
 };
 
 void Main(const char* url, ResponseCallback* cb, void* cbArg, Reader* body, Writer* result, void* reserved);
+
+#endif
