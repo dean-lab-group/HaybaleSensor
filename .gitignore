@@ -1,3 +1,4 @@
+*.keys
 .idea
 logs/
 /calibration_work/settings.py

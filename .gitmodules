@@ -4,3 +4,6 @@
 [submodule "lib/HaySense"]
 	path = lib/HaySense
 	url = git@github.com:elec3647/HaySense.git
+[submodule "lib/CalibrationManager"]
+	path = lib/CalibrationManager
+	url = git@github.com:elec3647/CalibrationManager.git

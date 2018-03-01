@@ -1,15 +1,15 @@
 % Equations for Solving Relative Humidity (RH) as a function of percent
 
 
-% xx      x value for y_0 and y_100, represents temperature (Hz)
+% temp_hz      x value for y_0 and y_100, represents temperature (Hz)
 % temp	  temperature in degrees Celsius
 % y_0     equation for the boundary condition of the 0% moisture line 
 %         for a given sensor
 % y_100   equation for the boundary condition of the 100% moisture line
-% y_prime equation for RH(%)
+% moisture equation for RH(%)
 % intercept_prime    y-intercept of final equation
 % slope_prime        slope of the final equation
-% x_prime            value of the moisture reading in Hertz (Hz)
+% moist_hz            value of the moisture reading in Hertz (Hz)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -20,7 +20,7 @@ y_100 (varies, see below)
 temp (varies, see below)
 slope_prime=(100/(y_0-y_100)) % will be negative
 intercept_prime=-slope*(y_0)  % will be positive
-y_prime= x_prime*slope_prime + intercept_prime
+moisture= moist_hz*slope_prime + intercept_prime
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,20 +29,20 @@ y_prime= x_prime*slope_prime + intercept_prime
 
 
 % Sensor	y_0				y_100
-% HB3		y_0=(-.2744)*xx+17645		y_100=.979*xx + 109.22
-% HB5		y_0=(-.22)*xx + 17838		y_100=.9861*xx + 46.437
-% HB6		y_0=(-.603)*xx + 19203		y_100=.9816*xx + 78.208
-% HB7		y_0=(-1.3092)*xx + 22099	y_100=.9858*xx + 50.6
+% HB3		y_0=(-.2744)*temp_hz+17645		y_100=.979*temp_hz + 109.22
+% HB5		y_0=(-.22)*temp_hz + 17838		y_100=.9861*temp_hz + 46.437
+% HB6		y_0=(-.603)*temp_hz + 19203		y_100=.9816*temp_hz + 78.208
+% HB7		y_0=(-1.3092)*temp_hz + 22099	y_100=.9858*temp_hz + 50.6
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Equations for solving Temperature in degrees Celcius as a function of T(Hz)
 
 % Sensor	temp
-% HB2		temp=.0045*xx + 6.5077
-% HB3		temp=.0044*xx + 7.6176
-% HB4		temp=.0047*xx + 7.4616
-% HB5		temp=.0041*xx + 10.407
-% HB6		temp=.0040*xx + 11.112
-% HB7		temp=.0048*xx + 6.1549
+% HB2		temp=.0045*temp_hz + 6.5077
+% HB3		temp=.0044*temp_hz + 7.6176
+% HB4		temp=.0047*temp_hz + 7.4616
+% HB5		temp=.0041*temp_hz + 10.407
+% HB6		temp=.0040*temp_hz + 11.112
+% HB7		temp=.0048*temp_hz + 6.1549
 

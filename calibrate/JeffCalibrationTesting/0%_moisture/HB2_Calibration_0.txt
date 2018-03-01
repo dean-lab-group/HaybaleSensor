@@ -1,3 +1,0 @@
-HB2 Calibration Data 100% Moisture
-
-thermcouple_temp percent_moisture sensor_moisture sensor_temp
