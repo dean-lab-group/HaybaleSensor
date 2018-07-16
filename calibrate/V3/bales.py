@@ -16,6 +16,7 @@ with open(dest_file, 'r') as dest_f:
 # data_array = np.asarray(data)
 # pprint(data_array)
 boo = {}
+
 for temp, voltage, sensor, capsense, thsense, bv in data[1:]:
     if sensor not in boo:
         boo[sensor] = dict(temp=[], voltage=[], capsense=[], thsense=[], BV=[])

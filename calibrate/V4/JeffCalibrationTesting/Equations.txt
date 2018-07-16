@@ -36,7 +36,7 @@ moisture= moist_hz*slope_prime + intercept_prime
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Equations for solving Temperature in degrees Celcius as a function of T(Hz)
+% Equations for solving Temperature in degrees Celsius as a function of T(Hz)
 
 % Sensor	temp
 % HB2		temp=.0045*temp_hz + 6.5077

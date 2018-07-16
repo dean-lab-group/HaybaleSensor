@@ -1,5 +1,5 @@
 import json
-path = '../../sensor_inventory.csv'
+path = '../sensor_inventory.csv'
 lines = open(path).readlines()
 for line in lines:
     Name, ID, t1, t2, m1, m2, m3, m4 = [x.strip() for x in line.strip().split(',')]
@@ -10,6 +10,6 @@ for line in lines:
         fh = open("calibrate/"+ID+".json", "w")
         fh.write(json.dumps(a))
         fh.close()
-    except:
-        continue
+    except Exception as e:
+        print "Failed", e
     

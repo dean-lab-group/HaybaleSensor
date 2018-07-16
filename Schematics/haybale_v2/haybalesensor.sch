@@ -1,0 +1,439 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:mykicad
+LIBS:Dean
+LIBS:haybalesensor-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L R R1
+U 1 1 57680AF4
+P 3800 3350
+F 0 "R1" V 3880 3350 50  0000 C CNN
+F 1 "10K" V 3800 3350 50  0000 C CNN
+F 2 "Resistors_SMD:R_0402" V 3730 3350 50  0001 C CNN
+F 3 "" H 3800 3350 50  0000 C CNN
+	1    3800 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L THERMISTOR TH1
+U 1 1 57680BD3
+P 7850 3350
+F 0 "TH1" V 7950 3400 50  0000 C CNN
+F 1 "10K" V 7750 3350 50  0000 C BNN
+F 2 "Resistors_SMD:R_0402" H 7850 3350 50  0001 C CNN
+F 3 "" H 7850 3350 50  0000 C CNN
+	1    7850 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C1
+U 1 1 57680C98
+P 6650 3350
+F 0 "C1" H 6675 3450 50  0000 L CNN
+F 1 ".01uF" H 6675 3250 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0402" H 6688 3200 50  0001 C CNN
+F 3 "" H 6650 3350 50  0000 C CNN
+	1    6650 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L MC14049BDR2G U1
+U 4 1 576815FB
+P 3950 4250
+F 0 "U1" H 3950 4150 60  0000 C CNN
+F 1 "MC14049BDR2G" H 3950 3550 60  0000 C CNN
+F 2 "Housings_SOIC:SOIC-16_3.9x9.9mm_Pitch1.27mm" H 3950 4250 60  0001 C CNN
+F 3 "" H 3950 4250 60  0000 C CNN
+	4    3950 4250
+	1    0    0    -1  
+$EndComp
+$Comp
+L MC14049BDR2G U1
+U 5 1 5768165E
+P 5700 4300
+F 0 "U1" H 5700 4200 60  0000 C CNN
+F 1 "MC14049BDR2G" H 5700 3600 60  0000 C CNN
+F 2 "Housings_SOIC:SOIC-16_3.9x9.9mm_Pitch1.27mm" H 5700 4300 60  0001 C CNN
+F 3 "" H 5700 4300 60  0000 C CNN
+	5    5700 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L MC14049BDR2G U1
+U 6 1 57681695
+P 7250 4300
+F 0 "U1" H 7250 4200 60  0000 C CNN
+F 1 "MC14049BDR2G" H 7250 3600 60  0000 C CNN
+F 2 "Housings_SOIC:SOIC-16_3.9x9.9mm_Pitch1.27mm" H 7250 4300 60  0001 C CNN
+F 3 "" H 7250 4300 60  0000 C CNN
+	6    7250 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L MC14049BDR2G U1
+U 3 1 576816F8
+P 4350 1800
+F 0 "U1" H 4350 1700 60  0000 C CNN
+F 1 "MC14049BDR2G" H 4350 1100 60  0000 C CNN
+F 2 "Housings_SOIC:SOIC-16_3.9x9.9mm_Pitch1.27mm" H 4350 1800 60  0001 C CNN
+F 3 "" H 4350 1800 60  0000 C CNN
+	3    4350 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L MC14049BDR2G U1
+U 1 1 57681759
+P 7250 1800
+F 0 "U1" H 7250 1700 60  0000 C CNN
+F 1 "MC14049BDR2G" H 7250 1100 60  0000 C CNN
+F 2 "Housings_SOIC:SOIC-16_3.9x9.9mm_Pitch1.27mm" H 7250 1800 60  0001 C CNN
+F 3 "" H 7250 1800 60  0000 C CNN
+	1    7250 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L MC14049BDR2G U1
+U 2 1 576817EC
+P 5800 1800
+F 0 "U1" H 5800 1700 60  0000 C CNN
+F 1 "MC14049BDR2G" H 5800 1100 60  0000 C CNN
+F 2 "Housings_SOIC:SOIC-16_3.9x9.9mm_Pitch1.27mm" H 5800 1800 60  0001 C CNN
+F 3 "" H 5800 1800 60  0000 C CNN
+	2    5800 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L VDD #PWR01
+U 1 1 57682083
+P 2600 2250
+F 0 "#PWR01" H 2600 2100 50  0001 C CNN
+F 1 "VDD" H 2600 2400 50  0000 C CNN
+F 2 "" H 2600 2250 50  0000 C CNN
+F 3 "" H 2600 2250 50  0000 C CNN
+	1    2600 2250
+	0    -1   1    0   
+$EndComp
+$Comp
+L GND #PWR02
+U 1 1 5768223E
+P 5000 2000
+F 0 "#PWR02" H 5000 1750 50  0001 C CNN
+F 1 "GND" H 5000 1850 50  0000 C CNN
+F 2 "" H 5000 2000 50  0000 C CNN
+F 3 "" H 5000 2000 50  0000 C CNN
+	1    5000 2000
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONN_01X01 P2
+U 1 1 57682706
+P 2600 1550
+F 0 "P2" H 2600 1650 50  0000 C CNN
+F 1 "VDD" V 2700 1550 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 2600 1550 50  0001 C CNN
+F 3 "" H 2600 1550 50  0000 C CNN
+	1    2600 1550
+	0    -1   -1   0   
+$EndComp
+$Comp
+L CONN_01X01 P1
+U 1 1 576827B7
+P 6650 1250
+F 0 "P1" H 6650 1350 50  0000 C CNN
+F 1 "THsense" V 6750 1250 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 6650 1250 50  0001 C CNN
+F 3 "" H 6650 1250 50  0000 C CNN
+	1    6650 1250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L CONN_01X01 P3
+U 1 1 5768281A
+P 4700 1650
+F 0 "P3" H 4700 1750 50  0000 C CNN
+F 1 "GND" V 4800 1650 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 4700 1650 50  0001 C CNN
+F 3 "" H 4700 1650 50  0000 C CNN
+	1    4700 1650
+	0    -1   -1   0   
+$EndComp
+NoConn ~ 3800 2150
+NoConn ~ 4900 2150
+$Comp
+L R R2
+U 1 1 578FDCAE
+P 3750 5850
+F 0 "R2" V 3830 5850 50  0000 C CNN
+F 1 "100K" V 3750 5850 50  0000 C CNN
+F 2 "Resistors_SMD:R_0402" V 3680 5850 50  0001 C CNN
+F 3 "" H 3750 5850 50  0000 C CNN
+	1    3750 5850
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R3
+U 1 1 578FDE91
+P 7800 5850
+F 0 "R3" V 7880 5850 50  0000 C CNN
+F 1 "100K" V 7800 5850 50  0000 C CNN
+F 2 "Resistors_SMD:R_0402" V 7730 5850 50  0001 C CNN
+F 3 "" H 7800 5850 50  0000 C CNN
+	1    7800 5850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3800 3200 3800 2550
+Wire Wire Line
+	3800 2550 3600 2550
+Wire Wire Line
+	3600 2550 3600 2300
+Wire Wire Line
+	3600 2300 3800 2300
+Wire Wire Line
+	4900 2300 5250 2300
+Wire Wire Line
+	6350 2300 6700 2300
+Wire Wire Line
+	7800 2300 8000 2300
+Wire Wire Line
+	8000 2300 8000 3050
+Wire Wire Line
+	8000 3050 7850 3050
+Wire Wire Line
+	7850 3050 7850 3100
+Wire Wire Line
+	6650 3200 6650 2600
+Wire Wire Line
+	6650 2600 6550 2600
+Wire Wire Line
+	6550 2600 6550 2300
+Connection ~ 6550 2300
+Wire Wire Line
+	7850 3600 7850 3750
+Wire Wire Line
+	7850 3750 3800 3750
+Wire Wire Line
+	3800 3750 3800 3500
+Wire Wire Line
+	6650 3500 6650 3750
+Connection ~ 6650 3750
+Connection ~ 6550 3750
+Wire Wire Line
+	5100 2300 5100 1450
+Wire Wire Line
+	5100 1450 6650 1450
+Connection ~ 5100 2300
+Wire Wire Line
+	3300 2050 3800 2050
+Wire Wire Line
+	4900 2050 5000 2050
+Wire Wire Line
+	5000 2050 5000 2000
+Connection ~ 3650 2050
+Wire Wire Line
+	4900 4800 5150 4800
+Wire Wire Line
+	5100 3700 5100 3750
+Connection ~ 5100 3750
+Wire Wire Line
+	4700 1850 4900 1850
+Wire Wire Line
+	4900 1850 4900 2000
+Wire Wire Line
+	4900 2000 4950 2000
+Wire Wire Line
+	4950 2000 4950 2050
+Connection ~ 4950 2050
+Wire Wire Line
+	3750 5700 3750 5050
+Wire Wire Line
+	7950 4800 7950 5550
+Wire Wire Line
+	7950 5550 7800 5550
+Wire Wire Line
+	7800 5550 7800 5700
+Wire Wire Line
+	7800 6000 7800 6250
+Wire Wire Line
+	7800 6250 3750 6250
+Wire Wire Line
+	3750 6250 3750 6000
+Connection ~ 6600 6250
+Connection ~ 6500 6250
+Connection ~ 5050 6250
+Wire Wire Line
+	3750 5050 3350 5050
+Wire Wire Line
+	3350 5050 3350 4750
+Wire Wire Line
+	3350 4750 3400 4750
+Wire Wire Line
+	4500 4750 4900 4750
+Wire Wire Line
+	4900 4750 4900 4800
+Connection ~ 5050 4800
+Wire Wire Line
+	7800 4800 7950 4800
+Wire Wire Line
+	6250 4800 6700 4800
+Wire Wire Line
+	6650 4800 6650 5650
+Wire Wire Line
+	6650 5650 6400 5650
+Connection ~ 6650 4800
+Wire Wire Line
+	6650 5550 6400 5550
+Connection ~ 6650 5550
+Wire Wire Line
+	6650 5450 6400 5450
+Connection ~ 6650 5450
+Wire Wire Line
+	6350 5400 6350 6250
+Connection ~ 6350 6250
+Wire Wire Line
+	6350 5400 6600 5400
+Wire Wire Line
+	6350 5500 6600 5500
+Connection ~ 6350 5500
+Wire Wire Line
+	6350 5600 6600 5600
+Connection ~ 6350 5600
+Wire Notes Line
+	6250 5350 6750 5350
+Wire Notes Line
+	6750 5350 6750 5750
+Wire Notes Line
+	6750 5750 6250 5750
+Wire Notes Line
+	6250 5750 6250 5350
+Text Label 6450 4800 0    60   ~ 0
+Cap1
+Text Label 6700 6250 0    60   ~ 0
+Cap2
+Wire Wire Line
+	4800 4750 4800 4150
+Wire Wire Line
+	4800 4150 5650 4150
+Connection ~ 4800 4750
+$Comp
+L CONN_01X01 P4
+U 1 1 57901A0B
+P 5650 3950
+F 0 "P4" H 5650 4050 50  0000 C CNN
+F 1 "CapSense" V 5750 3950 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 5650 3950 50  0001 C CNN
+F 3 "" H 5650 3950 50  0000 C CNN
+	1    5650 3950
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6700 5700 6850 5700
+Text Label 6800 5700 0    60   ~ 0
+Float
+$Comp
+L R R4
+U 1 1 579103C3
+P 2800 2650
+F 0 "R4" V 2880 2650 50  0000 C CNN
+F 1 "10K" V 2800 2650 50  0000 C CNN
+F 2 "Resistors_SMD:R_0402" V 2730 2650 50  0001 C CNN
+F 3 "" H 2800 2650 50  0000 C CNN
+	1    2800 2650
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2950 2450 2950 2800
+Wire Wire Line
+	2600 2650 2650 2650
+Connection ~ 2600 2250
+$Comp
+L CONN_01X01 P5
+U 1 1 57910754
+P 2950 3000
+F 0 "P5" H 2950 3100 50  0000 C CNN
+F 1 "CTRL" V 3050 3000 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 2950 3000 50  0001 C CNN
+F 3 "" H 2950 3000 50  0000 C CNN
+	1    2950 3000
+	0    1    1    0   
+$EndComp
+Connection ~ 2950 2650
+$Comp
+L SSM3J328R U2
+U 1 1 579101BF
+P 2850 2150
+F 0 "U2" H 3000 2350 60  0000 C CNN
+F 1 "SSM3J328R" H 2950 1950 60  0000 C CNN
+F 2 "TO_SOT_Packages_SMD:SOT-23" H 2850 2150 60  0001 C CNN
+F 3 "" H 2850 2150 60  0000 C CNN
+	1    2850 2150
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	2600 2050 2700 2050
+Connection ~ 2600 2050
+Wire Wire Line
+	3250 2150 3300 2150
+Connection ~ 3300 2150
+Wire Wire Line
+	2950 2450 2700 2450
+Wire Wire Line
+	2700 2450 2700 2250
+Wire Wire Line
+	2600 1750 2600 2650
+Wire Wire Line
+	3300 2150 3300 2050
+$Comp
+L CONN_01X01 P6
+U 1 1 57B744FC
+P 4900 1650
+F 0 "P6" H 4900 1750 50  0000 C CNN
+F 1 "GND" V 5000 1650 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 4900 1650 50  0001 C CNN
+F 3 "" H 4900 1650 50  0000 C CNN
+	1    4900 1650
+	0    -1   -1   0   
+$EndComp
+$EndSCHEMATC

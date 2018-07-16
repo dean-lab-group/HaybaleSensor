@@ -1,0 +1,14 @@
+** Drc report for C:\Users\rch0012\Desktop\Dropbox\haybale\haybale_v3\haybalesensor.kicad_pcb **
+** Created on  **
+
+** Found 2 DRC errors **
+ErrType(8): Two track ends too close
+    @ (140.007 mm,139.937 mm): Track 0.152 mm, net [] (0) on layer F.Cu, length: 10.816 mm
+    @ (140.007 mm,129.301 mm): Track 0.152 mm, net [/Cap2] (12) on layer F.Cu, length: 0.626 mm
+ErrType(10): Two track ends too close
+    @ (127.815 mm,129.121 mm): Track 0.152 mm, net [] (0) on layer F.Cu, length: 6.779 mm
+    @ (127.815 mm,124.038 mm): Track 0.152 mm, net [/Cap1] (13) on layer F.Cu, length: 5.413 mm
+
+** Found 0 unconnected pads **
+
+** End of Report **

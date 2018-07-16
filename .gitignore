@@ -57,6 +57,12 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-lib/.DS_Store
+.DS_Store
 HotSpot/devices.txt
 HotSpot/devices_all.txt
+*.bin
+*.no_crc
+*.lst
+*.bin
+*.no_crc
+AuburnBales/firmware/api_keys.h
