@@ -66,3 +66,6 @@ HotSpot/devices_all.txt
 *.bin
 *.no_crc
 AuburnBales/firmware/api_keys.h
+*.bin
+*.lst
+*.no_crc

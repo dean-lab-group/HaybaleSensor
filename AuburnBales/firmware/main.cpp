@@ -72,7 +72,9 @@ void loop() {
     }else{
       Particle.connect();
     }
-    delay(10000);
+    if(Serial.isConnected() == false){
+      delay(10000);
+    }
     if(Serial.isConnected()){
       Serial.println("Publishing:");
       Serial.println(sensor_data);

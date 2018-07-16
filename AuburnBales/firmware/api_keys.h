@@ -5,28 +5,28 @@
 // HB_02
 // String api_key = "QM0ZYJCSC2LVJRLM";
 
-String name = "HB_03";
-String api_key = "3WK9XQIQZ0SZ7ESB";
-float temp_constants[] = {0.0044, 7.6176};
-float moist_constants[] = {-0.2744,	17645, 0.979, 109.22};
+// String name = "HB_03";
+// String api_key = "3WK9XQIQZ0SZ7ESB";
+// float temp_constants[] = {0.0044, 7.6176};
+// float moist_constants[] = {-0.2744,	17645, 0.979, 109.22};
 
 // HB_04
 //String api_key = "8D287XO2KQV936JP";
 
-// HB_05
+// String name = "HB_05";
 // String api_key = "D8T4LTQIQ31BZBV9";
-// float moist_constants[] = {0.0041,	10.407,	-0.22,	17838};
-// float temp_constants[] = {0.9861,	46.437};
+// float temp_constants[] = {0.0041,	10.407};
+// float moist_constants[] = {-0.22,	17838, 0.9861, 46.437};
 
-// HB_06
-//String api_key = "NDO4K15P1C3TUBLV";
-//float moist_constants[] = {0.0040,	11.112,	-0.603,	19203};
-//float temp_constants[] = {0.9816,	78.208};
+// String name = "HB_06";
+// String api_key = "NDO4K15P1C3TUBLV";
+// float temp_constants[] = {0.0040,	11.112};
+// float moist_constants[] = {-0.603,	19203,	0.9816,	78.208};
 
-// HB_07
-//String api_key = "J4DZYJ56BSCF2MWK";
-//float moist_constants[] = {0.0048,	6.1549,	-1.3092,	22099};
-//float temp_constants[] = {0.9858,	50.6};
+String name = "HB_07";
+String api_key = "J4DZYJ56BSCF2MWK";
+float temp_constants[] = {0.0048,	6.1549};
+float moist_constants[] = {-1.3092,	22099,	0.9858,	50.6};
 
 // HB_08
 //String api_key = "N7DNS9700FZYVAH8";
