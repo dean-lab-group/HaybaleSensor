@@ -1,1 +1,5 @@
 https://github.com/elec3647/HaySense HaySense
+https://github.com/elec3647/FreqPeriodCounter FreqPeriodCounter
+https://github.com/elec3647/HaySense.git HaySense
+https://github.com/elec3647/HaySense HaySense
+https://github.com/elec3647/FreqPeriodCounter FreqPeriodCounter
