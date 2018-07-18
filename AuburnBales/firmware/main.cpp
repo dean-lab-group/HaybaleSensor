@@ -67,6 +67,7 @@ void loop() {
     String sensor_data = "{\"1\": \"" + String(temp) + "\", \"2\": \"" + String(temp_hz) + "\", \"3\": \"" + String(moist/6.0) + "\", \"4\": \"" + String(moist_hz) + "\", \"5\": \"" + String(battery) + "\", \"6\": \"" + System.deviceID() + "\", \"7\": \"" + name + "\", \"k\": \"" + api_key + "\"}";
     if(Particle.connected()){
       Particle.publish("thingSpeakWrite_hb", sensor_data, 60, PRIVATE);
+      Serial.println("Data published");
       Particle.process();
       lastPublish = now;
     }else{
